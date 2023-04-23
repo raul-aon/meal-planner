@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="mViewModel"
+            type="ro.raul_aon.meal_planner.view_models.IngredientEditViewModel" />
+    </data>
+
+<FrameLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.IngredientEditFragment">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Name"/>
+        <EditText
+            android:id="@+id/ingredientNameEdit"
+            android:text="@={mViewModel.name}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price per Pack"/>
+        <EditText
+            android:id="@+id/priceEdit"
+            android:inputType="numberDecimal"
+            android:text="@={mViewModel.pricePerPack}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Calories per Unit"/>
+        <EditText
+            android:id="@+id/caloriesEdit"
+            android:inputType="numberDecimal"
+            android:text="@={mViewModel.caloriesPerUnit}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Units Per Pack"/>
+        <EditText
+            android:id="@+id/unitsEdit"
+            android:inputType="numberDecimal"
+            android:text="@={mViewModel.unitsPerPack}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Protein Per Unit"/>
+
+        <EditText
+            android:id="@+id/proteinEdit"
+            android:inputType="numberDecimal"
+            android:text="@={mViewModel.proteinPerUnit}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Carbs Per Unit"/>
+        <EditText
+            android:id="@+id/carbsEdit"
+            android:inputType="numberDecimal"
+            android:text="@={mViewModel.carbsPerUnit}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Fats Per Unit"/>
+        <EditText
+            android:id="@+id/fatsEdit"
+            android:inputType="numberDecimal"
+            android:text="@={mViewModel.fatsPerUnit}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        </EditText>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/saveButton"
+                android:onClick="@{mViewModel::onSaveClick}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Save">
+            </Button>
+            <Button
+                android:id="@+id/cancelButton"
+                android:onClick="@{mViewModel::onCancelClick}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel">
+            </Button>
+            <Button
+                android:id="@+id/deleteButton"
+                android:onClick="@{mViewModel::onDeleteClick}"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Delete">
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
+</layout>
+
+

@@ -8,12 +8,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.time.Year;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
 import ro.raul_aon.meal_planner.data_access.RecipeBankDatabase;
 import ro.raul_aon.meal_planner.fragments.BankFragment;
+import ro.raul_aon.meal_planner.fragments.IngredientFragment;
 import ro.raul_aon.meal_planner.fragments.IngredientsFragment;
 import ro.raul_aon.meal_planner.fragments.RecipesFragment;
 import ro.raul_aon.meal_planner.fragments.ShopListFragment;
@@ -80,15 +84,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RecipeBankDatabase.databaseWriteExecutor.execute(new Runnable() {
             @Override
             public void run() {
-                RecipeBankDatabase.getInstance().ingredientDao().insert(
-                        new Ingredient(1, "orez")
-                );
-                RecipeBankDatabase.getInstance().ingredientDao().insert(
-                        new Ingredient(2, "sunca")
-                );
-                RecipeBankDatabase.getInstance().ingredientDao().insert(
-                        new Ingredient(3, "pui")
-                );
+                Calendar cal = Calendar.getInstance();
+                cal.setTime(new Date());
+                try {
+                } catch (Exception e){
+                    System.out.println(e.toString());
+                }
             }
         });
     }
