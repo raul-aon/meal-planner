@@ -79,10 +79,11 @@ public class IngredientFragment extends Fragment implements ListClickHandler {
     }
 
     @Override
-    public void onIngredientClick(Ingredient item) {
+    public void onListItemClick(Object item) {
+        Ingredient ingredient = (Ingredient) item;
         Bundle data = new Bundle();
         data.putBoolean("isNew", false);
-        data.putSerializable("ingredient", item);
+        data.putSerializable("ingredient", ingredient);
 
         FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.fragment_container, IngredientEditFragment.class, data);

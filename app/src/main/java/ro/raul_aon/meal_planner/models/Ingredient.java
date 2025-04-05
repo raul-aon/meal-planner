@@ -3,6 +3,7 @@ package ro.raul_aon.meal_planner.models;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 import androidx.room.TypeConverters;
 
@@ -15,7 +16,6 @@ import ro.raul_aon.meal_planner.utils.DateConverter;
 @Entity
 @TypeConverters(DateConverter.class)
 public class Ingredient implements Serializable {
-    @NonNull
     @PrimaryKey(autoGenerate = true)
     public int id;
     @ColumnInfo
@@ -35,6 +35,7 @@ public class Ingredient implements Serializable {
     @ColumnInfo
     public Date lastPriceUpdate;
 
+    @Ignore
     public Ingredient() {
     }
 

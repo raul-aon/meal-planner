@@ -24,7 +24,7 @@ import ro.raul_aon.meal_planner.R;
 
 public class IngredientsFragment extends Fragment implements View.OnClickListener {
 
-    private Button SaveBtn;
+    private Button AddButton;
 
     public static IngredientsFragment newInstance() {
         return new IngredientsFragment();
@@ -36,8 +36,8 @@ public class IngredientsFragment extends Fragment implements View.OnClickListene
 
         View view = inflater.inflate(R.layout.fragment_ingredients, container, false);
 
-        SaveBtn = (Button) view.findViewById(R.id.newIngredientButton);
-        SaveBtn.setOnClickListener(this);
+        AddButton = (Button) view.findViewById(R.id.newIngredientButton);
+        AddButton.setOnClickListener(this);
 
         return view;
     }

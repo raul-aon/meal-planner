@@ -8,23 +8,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import java.time.Year;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
-import java.util.concurrent.Executors;
 
 import ro.raul_aon.meal_planner.data_access.RecipeBankDatabase;
 import ro.raul_aon.meal_planner.fragments.BankFragment;
-import ro.raul_aon.meal_planner.fragments.IngredientFragment;
 import ro.raul_aon.meal_planner.fragments.IngredientsFragment;
 import ro.raul_aon.meal_planner.fragments.RecipesFragment;
 import ro.raul_aon.meal_planner.fragments.ShopListFragment;
 import ro.raul_aon.meal_planner.models.Ingredient;
+import ro.raul_aon.meal_planner.models.ShopListItem;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button BankBtn, ShopListBtn, RecipesBtn, IngredientsBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,14 +28,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         initDatabase();
 
-        BankBtn = (Button) findViewById(R.id.bank_btn);
-        BankBtn.setOnClickListener(this);
-        ShopListBtn = (Button) findViewById(R.id.shplst_btn);
-        ShopListBtn.setOnClickListener(this);
-        RecipesBtn = (Button) findViewById(R.id.recipes_btn);
-        RecipesBtn.setOnClickListener(this);
-        IngredientsBtn = (Button) findViewById(R.id.ings_btn);
-        IngredientsBtn.setOnClickListener(this);
+        Button bankBtn = findViewById(R.id.bank_btn);
+        bankBtn.setOnClickListener(this);
+        Button shopListBtn = findViewById(R.id.shplst_btn);
+        shopListBtn.setOnClickListener(this);
+        Button recipesBtn = findViewById(R.id.recipes_btn);
+        recipesBtn.setOnClickListener(this);
+        Button ingredientsBtn = findViewById(R.id.ings_btn);
+        ingredientsBtn.setOnClickListener(this);
 
         Fragment f = BankFragment.newInstance();
         setView(f);
@@ -49,28 +44,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         int buttonId = view.getId();
-        switch (buttonId){
-            case R.id.bank_btn: {
-                Fragment f = BankFragment.newInstance();
-                setView(f);
-                break;
-            }
-            case R.id.shplst_btn: {
-                Fragment f = ShopListFragment.newInstance();
-                setView(f);
-                break;
-            }
-            case R.id.recipes_btn: {
-                Fragment f = RecipesFragment.newInstance();
-                setView(f);
-                break;
-            }
-            case R.id.ings_btn:{
-                Fragment f = IngredientsFragment.newInstance();
-                setView(f);
-                break;
-            }
-        }
+        Fragment f = getFragmentFromId(buttonId);
+        setView(f);
     }
 
     private void setView(Fragment fragment) {
@@ -79,19 +54,46 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ft.commit();
     }
 
+    private Fragment getFragmentFromId(int id){
+        switch (id){
+            case R.id.bank_btn: {
+                return BankFragment.newInstance();
+            }
+            case R.id.shplst_btn: {
+                return ShopListFragment.newInstance();
+            }
+            case R.id.recipes_btn: {
+                return RecipesFragment.newInstance();
+            }
+            case R.id.ings_btn:{
+                return IngredientsFragment.newInstance();
+            }
+        }
+        return BankFragment.newInstance();
+    }
+
     private void initDatabase(){
         RecipeBankDatabase.startDbInstance(getApplicationContext());
-        RecipeBankDatabase.databaseWriteExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                Calendar cal = Calendar.getInstance();
-                cal.setTime(new Date());
-                try {
-                } catch (Exception e){
-                    System.out.println(e.toString());
-                }
+        RecipeBankDatabase.databaseWriteExecutor.execute(() -> {
+            try {
+                PopulateDatabase();
+            } catch (Exception e){
+                System.out.println(e.toString());
             }
         });
+    }
+
+    private void PopulateDatabase()
+    {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(new Date());
+
+        RecipeBankDatabase.getInstance().ingredientDao().insert(new Ingredient(1, "Fish fingers", 15, 20,
+                10, 10, 10, 19.90f, new Date()));
+        RecipeBankDatabase.getInstance().ingredientDao().insert(new Ingredient(2, "Frozen veggies", 450, 25,
+                10, 50, 10, 8.45f, new Date()));
+
+        RecipeBankDatabase.getInstance().shopListDao().insert(new ShopListItem(2, "Pizza", 1, false, 15));
     }
 
 }

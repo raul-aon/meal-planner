@@ -26,7 +26,7 @@ import ro.raul_aon.meal_planner.R;
 
 public class IngredientEditFragment extends Fragment {
 
-    private IngredientEditViewModel mViewModel = new IngredientEditViewModel();
+    private final IngredientEditViewModel mViewModel = new IngredientEditViewModel();
 
     public static IngredientEditFragment newInstance() {
         return new IngredientEditFragment();

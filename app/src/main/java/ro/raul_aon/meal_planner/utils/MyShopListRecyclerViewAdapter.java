@@ -1,30 +1,30 @@
 package ro.raul_aon.meal_planner.utils;
 
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import ro.raul_aon.meal_planner.R;
-import ro.raul_aon.meal_planner.handlers.ListClickHandler;
-import ro.raul_aon.meal_planner.models.Ingredient;
-import ro.raul_aon.meal_planner.databinding.FragmentIngredientBinding;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link Ingredient}.
- */
-public class MyIngredientRecyclerViewAdapter extends RecyclerView.Adapter<MyIngredientRecyclerViewAdapter.ViewHolder> {
+import ro.raul_aon.meal_planner.R;
+import ro.raul_aon.meal_planner.databinding.FragmentIngredientBinding;
+import ro.raul_aon.meal_planner.handlers.ListClickHandler;
+import ro.raul_aon.meal_planner.models.ShopListItem;
 
-    private final List<Ingredient> mValues;
+/**
+ * {@link RecyclerView.Adapter} that can display a {@link ShopListItem}.
+ */
+public class MyShopListRecyclerViewAdapter extends RecyclerView.Adapter<MyShopListRecyclerViewAdapter.ViewHolder> {
+
+    private final List<ShopListItem> mValues;
     private ListClickHandler handler;
 
-    public MyIngredientRecyclerViewAdapter(List<Ingredient> items, ListClickHandler handler) {
+    public MyShopListRecyclerViewAdapter(List<ShopListItem> items, ListClickHandler handler) {
         mValues = items;
         this.handler = handler;
     }
@@ -40,18 +40,6 @@ public class MyIngredientRecyclerViewAdapter extends RecyclerView.Adapter<MyIngr
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
         holder.mContentView.setText(mValues.get(position).toString());
-
-
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(new Date());
-        cal.add(Calendar.MONTH, -3);
-        if(holder.mItem.lastPriceUpdate.compareTo(cal.getTime()) < 0) {
-            holder.mContentView.setBackgroundColor(holder.mContentView.getResources().getColor(R.color.yellow));
-        }
-        cal.add(Calendar.MONTH, -9);
-        if(holder.mItem.lastPriceUpdate.compareTo(cal.getTime()) < 0) {
-            holder.mContentView.setBackgroundColor(holder.mContentView.getResources().getColor(R.color.red));
-        }
     }
 
     @Override
@@ -61,7 +49,7 @@ public class MyIngredientRecyclerViewAdapter extends RecyclerView.Adapter<MyIngr
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final TextView mContentView;
-        public Ingredient mItem;
+        public ShopListItem mItem;
 
         public ViewHolder(FragmentIngredientBinding binding) {
             super(binding.getRoot());

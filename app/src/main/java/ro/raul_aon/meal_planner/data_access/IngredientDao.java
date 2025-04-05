@@ -16,6 +16,9 @@ public interface IngredientDao {
     @Query("SELECT * FROM ingredient ORDER BY name")
     LiveData<List<Ingredient>> getAll();
 
+    @Query("SELECT * FROM ingredient where name = :val")
+    Ingredient getByName(String val);
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Ingredient ingredient);
 
