@@ -2,11 +2,8 @@ package ro.raul_aon.meal_planner.view_models;
 
 import android.view.View;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 
 import java.util.Date;
@@ -96,12 +93,7 @@ public class IngredientEditViewModel extends ViewModel implements EditButtonsCli
     @Override
     public void onSaveClick(View view) {
         ingredient.lastPriceUpdate = new Date();
-        RecipeBankDatabase.databaseWriteExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                RecipeBankDatabase.getInstance().ingredientDao().insert(ingredient);
-            }
-        });
+        RecipeBankDatabase.databaseWriteExecutor.execute(() -> RecipeBankDatabase.getInstance().ingredientDao().insert(ingredient));
         onCancelClick(view);
     }
 
@@ -112,12 +104,7 @@ public class IngredientEditViewModel extends ViewModel implements EditButtonsCli
 
     @Override
     public void onDeleteClick(View view) {
-        RecipeBankDatabase.databaseWriteExecutor.execute(new Runnable() {
-            @Override
-            public void run() {
-                RecipeBankDatabase.getInstance().ingredientDao().delete(ingredient);
-            }
-        });
+        RecipeBankDatabase.databaseWriteExecutor.execute(() -> RecipeBankDatabase.getInstance().ingredientDao().delete(ingredient));
         onCancelClick(view);
     }
 }

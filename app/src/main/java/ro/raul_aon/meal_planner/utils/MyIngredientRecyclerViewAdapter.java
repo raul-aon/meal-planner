@@ -1,9 +1,10 @@
 package ro.raul_aon.meal_planner.utils;
 
+import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.res.Resources;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
@@ -16,41 +17,38 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-/**
- * {@link RecyclerView.Adapter} that can display a {@link Ingredient}.
- */
 public class MyIngredientRecyclerViewAdapter extends RecyclerView.Adapter<MyIngredientRecyclerViewAdapter.ViewHolder> {
 
     private final List<Ingredient> mValues;
-    private ListClickHandler handler;
+    private final ListClickHandler handler;
 
     public MyIngredientRecyclerViewAdapter(List<Ingredient> items, ListClickHandler handler) {
-        mValues = items;
+        this.mValues = items;
         this.handler = handler;
     }
 
+    @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ViewHolder(FragmentIngredientBinding.inflate(LayoutInflater.from(parent.getContext()), parent, false));
-
     }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
         holder.mItem = mValues.get(position);
-        holder.mContentView.setText(mValues.get(position).toString());
-
+        holder.mContentView.setText(holder.mItem.toString());
 
         Calendar cal = Calendar.getInstance();
         cal.setTime(new Date());
         cal.add(Calendar.MONTH, -3);
+
+        Resources.Theme theme = holder.mContentView.getContext().getTheme();
         if(holder.mItem.lastPriceUpdate.compareTo(cal.getTime()) < 0) {
-            holder.mContentView.setBackgroundColor(holder.mContentView.getResources().getColor(R.color.yellow));
+            holder.mContentView.setBackgroundColor(holder.mContentView.getResources().getColor(R.color.yellow, theme));
         }
         cal.add(Calendar.MONTH, -9);
         if(holder.mItem.lastPriceUpdate.compareTo(cal.getTime()) < 0) {
-            holder.mContentView.setBackgroundColor(holder.mContentView.getResources().getColor(R.color.red));
+            holder.mContentView.setBackgroundColor(holder.mContentView.getResources().getColor(R.color.red, theme));
         }
     }
 
@@ -63,18 +61,14 @@ public class MyIngredientRecyclerViewAdapter extends RecyclerView.Adapter<MyIngr
         public final TextView mContentView;
         public Ingredient mItem;
 
-        public ViewHolder(FragmentIngredientBinding binding) {
+        public ViewHolder(@NonNull FragmentIngredientBinding binding) {
             super(binding.getRoot());
             mContentView = binding.content;
 
-            binding.getRoot().setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    handler.onListItemClick(mItem);
-                }
-            });
+            binding.getRoot().setOnClickListener(view -> handler.onListItemClick(mItem));
         }
 
+        @NonNull
         @Override
         public String toString() {
             return super.toString() + " '" + mContentView.getText() + "'";

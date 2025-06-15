@@ -2,7 +2,6 @@ package ro.raul_aon.meal_planner.data_access;
 
 import androidx.lifecycle.LiveData;
 import androidx.room.Dao;
-import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
@@ -18,9 +17,6 @@ public interface ShopListDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(ShopListItem item);
-
-    @Delete
-    void delete(ShopListItem item);
 
     @Query("DELETE FROM shopListItem where done")
     void clear();

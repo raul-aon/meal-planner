@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+    <data>
+        <variable
+            name="mViewModel"
+            type="ro.raul_aon.meal_planner.view_models.RecipeEditViewModel" />
+    </data>
+
+    <FrameLayout
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.RecipeEditFragment">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Name"/>
+            <EditText
+                android:id="@+id/recipeNameEdit"
+                android:text="@={mViewModel.name}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Servings"/>
+            <EditText
+                android:id="@+id/servingEdit"
+                android:inputType="number"
+                android:text="@={mViewModel.servings}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Reheat?"/>
+                <CheckBox
+                    android:id="@+id/reheatEdit"
+                    android:checked="@={mViewModel.reheat}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </CheckBox>
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Instructions"/>
+            <EditText
+                android:id="@+id/instructionsEdit"
+                android:text="@={mViewModel.instructions}"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+            </EditText>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <Button
+                    android:id="@+id/saveButton"
+                    android:onClick="@{mViewModel::onSaveClick}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save">
+                </Button>
+                <Button
+                    android:id="@+id/cancelButton"
+                    android:onClick="@{mViewModel::onCancelClick}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel">
+                </Button>
+                <Button
+                    android:id="@+id/deleteButton"
+                    android:onClick="@{mViewModel::onDeleteClick}"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete">
+                </Button>
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <AutoCompleteTextView
+                    android:id="@+id/newIngName"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:text="@={mViewModel.newIngName}"/>
+
+                <EditText
+                    android:id="@+id/newIngQty"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="20"
+                    android:ems="10"
+                    android:inputType="number"
+                    android:text="@={mViewModel.newIngQty}"/>
+
+                <Button
+                    android:id="@+id/addSLI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Add"
+                    android:onClick="@{mViewModel::onAddClick}"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/recipeTotals"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="10"
+                    android:text="@{mViewModel.recipeTotals}"/>
+
+                <Button
+                    android:id="@+id/clearSLI"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Refresh"
+                    android:onClick="@{mViewModel::onClearClick}"/>
+            </LinearLayout>
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recipeIngredientsContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </FrameLayout>
+</layout>
+
+

@@ -53,6 +53,7 @@ public class Ingredient implements Serializable {
         this.lastPriceUpdate = lastPriceUpdate;
     }
 
+    @NonNull
     public String toString() {
         return "* " + this.name + " at " + this.pricePerPack + " for " + this.unitsPerPack;
     }

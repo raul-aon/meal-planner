@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<data>
+    <variable
+        name="mViewModel"
+        type="ro.raul_aon.meal_planner.view_models.ShopListViewModel" />
+</data>
+
+<FrameLayout
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -24,7 +31,8 @@
                 android:id="@+id/sliName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="10" />
+                android:layout_weight="10"
+                android:text="@={mViewModel.sliName}"/>
 
             <EditText
                 android:id="@+id/sliUnits"
@@ -32,14 +40,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="20"
                 android:ems="10"
-                android:inputType="number" />
+                android:inputType="number"
+                android:text="@={mViewModel.sliUnits}"/>
 
             <Button
                 android:id="@+id/addSLI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Add" />
+                android:text="Add"
+                android:onClick="@{mViewModel::onAddClick}"/>
 
         </LinearLayout>
 
@@ -53,14 +63,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="Total: " />
+                android:text="@{mViewModel.slTotal}"/>
 
             <Button
                 android:id="@+id/clearSLI"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Clr" />
+                android:text="Clr"
+                android:onClick="@{mViewModel::onClearClick}"/>
         </LinearLayout>
 
         <androidx.recyclerview.widget.RecyclerView
@@ -70,3 +81,4 @@
     </LinearLayout>
 
 </FrameLayout>
+</layout>

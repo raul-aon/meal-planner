@@ -1,24 +1,21 @@
 package ro.raul_aon.meal_planner.models;
 
+import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
-import androidx.room.TypeConverters;
 
 import java.io.Serializable;
 
-import ro.raul_aon.meal_planner.utils.DateConverter;
-
 @Entity
-@TypeConverters(DateConverter.class)
 public class ShopListItem implements Serializable {
     @PrimaryKey(autoGenerate = true)
     public int id;
     @ColumnInfo
     public String name;
     @ColumnInfo
-    public float units;
+    public float units = 1;
     @ColumnInfo
     public boolean done;
     @ColumnInfo
@@ -36,6 +33,7 @@ public class ShopListItem implements Serializable {
         this.pricePerUnit = pricePerUnit;
     }
 
+    @NonNull
     public String toString() {
         return (this.done ? " ✓ " : " - ") + this.units + " x " + this.name + " @ " + this.pricePerUnit;
     }

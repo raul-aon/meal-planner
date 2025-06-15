@@ -5,9 +5,27 @@
     android:layout_height="match_parent"
     tools:context=".fragments.RecipesFragment">
 
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Recipes" />
+
+        <Button
+        android:id = "@+id/addRecipeButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="New" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recipesListContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    </LinearLayout>
 
 </FrameLayout>

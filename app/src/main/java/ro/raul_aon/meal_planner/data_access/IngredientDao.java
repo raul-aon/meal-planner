@@ -18,6 +18,8 @@ public interface IngredientDao {
 
     @Query("SELECT * FROM ingredient where name = :val")
     Ingredient getByName(String val);
+    @Query("SELECT * FROM ingredient where id = :val")
+    Ingredient getById(int val);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Ingredient ingredient);
