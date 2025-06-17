@@ -8,13 +8,10 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import java.util.Date;
-
 import ro.raul_aon.meal_planner.R;
 import ro.raul_aon.meal_planner.data_access.RecipeBankDatabase;
 import ro.raul_aon.meal_planner.handlers.AddClearHandler;
 import ro.raul_aon.meal_planner.handlers.EditButtonsClickHandler;
-import ro.raul_aon.meal_planner.handlers.ListClickHandler;
 import ro.raul_aon.meal_planner.models.Ingredient;
 import ro.raul_aon.meal_planner.models.Recipe;
 import ro.raul_aon.meal_planner.models.RecipeIngredient;

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Meal Planner</string>
     <string name="slTotal">Total: %1$.2f %2$s</string>
+    <string name="bank">Bank</string>
+    <string name="ings">Ings</string>
+    <string name="recs">Recs</string>
+    <string name="shop">Shop</string>
+    <string name="recipe">Recipe</string>
+    <string name="bankBtnLabel">Bank</string>
 </resources>

@@ -3,6 +3,7 @@ package ro.raul_aon.meal_planner;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.room.Ignore;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import ro.raul_aon.meal_planner.fragments.BankFragment;
 import ro.raul_aon.meal_planner.fragments.IngredientsFragment;
 import ro.raul_aon.meal_planner.fragments.RecipesFragment;
 import ro.raul_aon.meal_planner.fragments.ShopListFragment;
+import ro.raul_aon.meal_planner.models.BankItem;
 import ro.raul_aon.meal_planner.models.Ingredient;
 import ro.raul_aon.meal_planner.models.Recipe;
 import ro.raul_aon.meal_planner.models.RecipeIngredient;
@@ -29,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        initDatabase();
+        RecipeBankDatabase.startDbInstance(getApplicationContext());
+        //initDatabase();
 
         Button bankBtn = findViewById(R.id.bank_btn);
         bankBtn.setOnClickListener(this);
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return BankFragment.newInstance();
     }
 
+    @Ignore
     private void initDatabase(){
         RecipeBankDatabase.startDbInstance(getApplicationContext());
         RecipeBankDatabase.databaseWriteExecutor.execute(() -> {
@@ -108,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         RecipeBankDatabase.getInstance().recipeDao().addIngredient(ri);
         RecipeIngredient ri2 = new RecipeIngredient(2, r.id, i2.id, 300f);
         RecipeBankDatabase.getInstance().recipeDao().addIngredient(ri2);
+
+        BankItem bi = new BankItem(1, r.name, r.servings);
+        RecipeBankDatabase.getInstance().bankDao().insert(bi);
     }
 
 }

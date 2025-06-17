@@ -9,12 +9,13 @@ import androidx.room.RoomDatabase;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
+import ro.raul_aon.meal_planner.models.BankItem;
 import ro.raul_aon.meal_planner.models.Ingredient;
 import ro.raul_aon.meal_planner.models.Recipe;
 import ro.raul_aon.meal_planner.models.RecipeIngredient;
 import ro.raul_aon.meal_planner.models.ShopListItem;
 
-@Database(entities = {Ingredient.class, ShopListItem.class, Recipe.class, RecipeIngredient.class}
+@Database(entities = {Ingredient.class, ShopListItem.class, Recipe.class, RecipeIngredient.class, BankItem.class}
         , version = 1, exportSchema = false)
 public abstract class RecipeBankDatabase extends RoomDatabase {
     private static final int NUMBER_OF_THREADS = 4;
@@ -36,4 +37,5 @@ public abstract class RecipeBankDatabase extends RoomDatabase {
     public abstract IngredientDao ingredientDao();
     public abstract ShopListDao shopListDao();
     public abstract RecipeDao recipeDao();
+    public abstract BankDao bankDao();
 }

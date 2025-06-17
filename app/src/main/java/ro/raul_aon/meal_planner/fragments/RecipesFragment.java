@@ -18,7 +18,6 @@ import android.widget.Button;
 import ro.raul_aon.meal_planner.R;
 import ro.raul_aon.meal_planner.data_access.RecipeBankDatabase;
 import ro.raul_aon.meal_planner.handlers.ListClickHandler;
-import ro.raul_aon.meal_planner.models.Ingredient;
 import ro.raul_aon.meal_planner.models.Recipe;
 import ro.raul_aon.meal_planner.utils.MyRecipeRecyclerViewAdapter;
 

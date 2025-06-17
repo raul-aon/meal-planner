@@ -6,7 +6,6 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
-import androidx.room.Transaction;
 
 import java.util.List;
 
@@ -19,7 +18,7 @@ public interface RecipeDao {
     LiveData<List<Recipe>> getAll();
 
     @Query("SELECT * FROM recipe where name = :val")
-    LiveData<Recipe> getByName(String val);
+    Recipe getByName(String val);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insert(Recipe recipe);
@@ -29,6 +28,9 @@ public interface RecipeDao {
 
     @Query("SELECT * FROM recipeingredient where recipeId = :val")
     LiveData<List<RecipeIngredient>> getRecipeIngredients(int val);
+
+    @Query("SELECT * FROM recipeingredient where recipeId = :val")
+    List<RecipeIngredient> getRecipeIngredientsNow(int val);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void addIngredient(RecipeIngredient recipeIngredient);

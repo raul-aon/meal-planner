@@ -7,8 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
-import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,18 +15,14 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.util.function.BinaryOperator;
-
 import ro.raul_aon.meal_planner.R;
 import ro.raul_aon.meal_planner.data_access.RecipeBankDatabase;
-import ro.raul_aon.meal_planner.databinding.FragmentIngredientEditBinding;
 import ro.raul_aon.meal_planner.databinding.FragmentRecipeEditBinding;
 import ro.raul_aon.meal_planner.handlers.ListClickHandler;
 import ro.raul_aon.meal_planner.models.Ingredient;
 import ro.raul_aon.meal_planner.models.Recipe;
 import ro.raul_aon.meal_planner.models.RecipeIngredient;
 import ro.raul_aon.meal_planner.utils.MyRecipeIngredientsRecyclerViewAdapter;
-import ro.raul_aon.meal_planner.utils.MyRecipeRecyclerViewAdapter;
 import ro.raul_aon.meal_planner.view_models.RecipeEditViewModel;
 
 public class RecipeEditFragment extends Fragment implements ListClickHandler {

@@ -3,13 +3,9 @@ package ro.raul_aon.meal_planner.view_models;
 import android.view.View;
 import android.widget.EditText;
 
-import androidx.databinding.Bindable;
-import androidx.databinding.Observable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
-
-import java.util.List;
 
 import ro.raul_aon.meal_planner.R;
 import ro.raul_aon.meal_planner.data_access.RecipeBankDatabase;
@@ -18,8 +14,6 @@ import ro.raul_aon.meal_planner.models.Ingredient;
 import ro.raul_aon.meal_planner.models.ShopListItem;
 
 public class ShopListViewModel extends ViewModel implements AddClearHandler {
-    public LiveData<List<ShopListItem>> shoppingList =
-            RecipeBankDatabase.getInstance().shopListDao().getAll();
 
     private final MutableLiveData<String> slTotal = new MutableLiveData<>("Total: ");
 
